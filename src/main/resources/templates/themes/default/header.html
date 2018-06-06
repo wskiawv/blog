@@ -46,7 +46,7 @@
                 </span>
             </form>
         </div>
-        <div class="collapse navbar-collapse" id="example-navbar-collapse">
+       <!-- <div class="collapse navbar-collapse" id="example-navbar-collapse">
             <ul class="nav navbar-nav">
                 <li class="dropdown">
                     <a class="dropdown-toggle" href="#" data-toggle="dropdown" ><span th:text="#{user.menu.language}"></span></a>
@@ -56,7 +56,20 @@
                     </ul>
                 </li>
             </ul>
-        </div>
+        </div>-->
+        <ul class="nav navbar-nav navbar-right pull-right">
+            <li class="dropdown">
+                <a th:href="@{index.html}" class="dropdown-toggle profile" data-toggle="dropdown"
+                   aria-expanded="true"><img th:src="@{/user/img/logo.png}" width="auto;" height="50px;" alt="user-img"
+                                             class="img-circle"/> </a>
+                <ul class="dropdown-menu">
+                    <li><a href="#">
+                        <span th:text="#{user.menu.language}"></span></a></li>
+                    <li><a href="#"><i class="fa fa-sun-o"></i> <span th:text="#{user.menu.en}"></span></a></li>
+                    <li><a href="#"><i class="fa fa-sign-out"></i> <span th:text="#{user.menu.cn}"></span></a></li>
+                </ul>
+            </li>
+        </ul>
         <div class="navbar-mobile-menu" onclick="">
             <span class="icon-menu cross"><span class="middle"></span></span>
             <ul>
