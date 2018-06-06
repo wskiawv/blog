@@ -46,12 +46,30 @@
                 </span>
             </form>
         </div>
+        <div class="collapse navbar-collapse" id="example-navbar-collapse">
+            <ul class="nav navbar-nav">
+                <li class="dropdown">
+                    <a class="dropdown-toggle" href="#" data-toggle="dropdown" ><span th:text="#{user.menu.language}"></span></a>
+                    <ul class="dropdown-menu" >
+                        <li><a  href="#"><span th:text="#{user.menu.en}"></span></a></li>
+                        <li><a  href="#"><span th:text="#{user.menu.cn}"></span></a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
         <div class="navbar-mobile-menu" onclick="">
             <span class="icon-menu cross"><span class="middle"></span></span>
             <ul>
                 <li><a th:href="${commons.site_url('/archives')}"><span th:text="#{archives}"></span></a></li>
                 <li><a th:href="${commons.site_url('/links')}"><span th:text="#{link}"></span></a></li>
                 <li><a th:href="${commons.site_url('/about')}"><span th:text="#{about}"></span></a></li>
+                <!--<li class="dropdown">
+                    <a class="dropdown-toggle" href="#" data-toggle="dropdown" ><span th:text="#{user.menu.language}"></span></a>
+                    <ul class="dropdown-menu" >
+                        <li><a  href="#"><span th:text="#{user.menu.en}"></span></a></li>
+                        <li><a  href="#"><span th:text="#{user.menu.cn}"></span></a></li>
+                    </ul>
+                </li>-->
             </ul>
         </div>
     </div>
