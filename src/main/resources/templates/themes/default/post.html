@@ -2,11 +2,13 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:yh="http://www.thymeleaf.org">
 <div th:replace="themes/default/header::header(${article.title},${article.tags})"></div>
 <body>
+
 <article class="main-content post-page" itemscope="" itemtype="http://schema.org/Article">
     <div class="post-header">
         <h1 class="post-title" itemprop="name headline">
             <a th:href="${commons.permalink(article)}" th:text="${article.title}" data-no-instant=""></a>
         </h1>
+
         <div class="post-data">
           <span th:text="#{message.publish}"></span>  <time th:datetime="${commons.fmtdate(article.created)}" itemprop="datePublished"  th:text="${commons.fmtdate(article.created)}"></time>
             <th:block th:utext="${commons.show_categories(article.categories)}"/> / <a href="#comments" th:text="${article.commentsNum ?: 0}+#{commnet.number}"></a> /
@@ -15,14 +17,64 @@
     </div>
     <div id="post-content" class="post-content" itemprop="articleBody">
         <p class="post-tags" th:utext="${commons.show_tags(article.tags)}"></p>
+        <div class="jq22-container">
+            <article class="container">
+                <section>
+                    <figure id="full_feature" class="swipslider">
+                        <ul class="sw-slides">
+                        </ul>
+                    </figure>
+                </section>
+            </article>
+        </div>
         <th:block th:utext="${commons.article(article.content)}"/>
         <p class="post-info">
             <br/><span th:text="#{comment.editTime}"></span>:
             <th:block th:text="${commons.fmtdate(article.modified, 'yyyy/MM/dd HH:mm')}"/>
         </p>
     </div>
+    <!--弹出窗口显示图片html代码-->
+    <div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="pswp__bg"></div>
+        <div class="pswp__scroll-wrap">
+            <div class="pswp__container">
+                <div class="pswp__item"></div>
+                <div class="pswp__item"></div>
+                <div class="pswp__item"></div>
+            </div>
+            <div class="pswp__ui pswp__ui--hidden">
+                <div class="pswp__top-bar">
+                    <div class="pswp__counter"></div>
+                    <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+                    <button class="pswp__button pswp__button--share" title="Share"></button>
+                    <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+                    <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+                    <div class="pswp__preloader">
+                        <div class="pswp__preloader__icn">
+                            <div class="pswp__preloader__cut">
+                                <div class="pswp__preloader__donut"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                    <div class="pswp__share-tooltip"></div>
+                </div>
+                <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+                </button>
+                <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+                </button>
+                <div class="pswp__caption">
+                    <div class="pswp__caption__center"></div>
+                </div>
+            </div>
+        </div>
+    </div>
 </article>
 <div th:replace="themes/default/comments::comments"></div>
 <div th:replace="themes/default/footer::footer"></div>
 </body>
+<script th:src="@{/user/js/photoswipe.min.js}"></script>
+<script th:src="@{/user/js/photoswipe-ui-default.min.js}"></script>
+<script th:src="@{/user/js/init.js}"></script>
 </html>
