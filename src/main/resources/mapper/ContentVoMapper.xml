@@ -17,6 +17,7 @@
     <result column="allow_comment" jdbcType="BIT" property="allowComment" />
     <result column="allow_ping" jdbcType="BIT" property="allowPing" />
     <result column="allow_feed" jdbcType="BIT" property="allowFeed" />
+    <result column="cover" jdbcType="VARCHAR" property="cover" />
   </resultMap>
   <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.my.blog.website.modal.Vo.ContentVo">
     <result column="content" jdbcType="LONGVARCHAR" property="content" />
@@ -81,7 +82,7 @@
   </sql>
   <sql id="Base_Column_List">
     cid, title, slug, created, modified, author_id, type, status, tags, categories, hits, 
-    comments_num, allow_comment, allow_ping, allow_feed
+    comments_num, allow_comment, allow_ping, allow_feed, cover
   </sql>
   <sql id="Blob_Column_List">
     content
@@ -148,13 +149,13 @@
       type, status, tags, 
       categories, hits, comments_num, 
       allow_comment, allow_ping, allow_feed, 
-      content)
+      content,cover)
     values (#{cid,jdbcType=INTEGER}, #{title,jdbcType=VARCHAR}, #{slug,jdbcType=VARCHAR}, 
       #{created,jdbcType=INTEGER}, #{modified,jdbcType=INTEGER}, #{authorId,jdbcType=INTEGER}, 
       #{type,jdbcType=VARCHAR}, #{status,jdbcType=VARCHAR}, #{tags,jdbcType=VARCHAR}, 
       #{categories,jdbcType=VARCHAR}, #{hits,jdbcType=INTEGER}, #{commentsNum,jdbcType=INTEGER}, 
       #{allowComment,jdbcType=BIT}, #{allowPing,jdbcType=BIT}, #{allowFeed,jdbcType=BIT}, 
-      #{content,jdbcType=LONGVARCHAR})
+      #{content,jdbcType=LONGVARCHAR},#{cover,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.my.blog.website.modal.Vo.ContentVo" useGeneratedKeys="true" keyProperty="cid">
     insert into t_contents
@@ -207,6 +208,9 @@
       <if test="content != null">
         content,
       </if>
+      <if test="cover != null">
+        cover,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="cid != null">
@@ -256,6 +260,9 @@
       </if>
       <if test="content != null">
         #{content,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="cover != null">
+        #{cover,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
@@ -316,6 +323,9 @@
       <if test="record.content != null">
         content = #{record.content,jdbcType=LONGVARCHAR},
       </if>
+      <if test="record.cover != null">
+        cover = #{record.cover,jdbcType=VARCHAR},
+      </if>
     </set>
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
@@ -338,7 +348,8 @@
       allow_comment = #{record.allowComment,jdbcType=BIT},
       allow_ping = #{record.allowPing,jdbcType=BIT},
       allow_feed = #{record.allowFeed,jdbcType=BIT},
-      content = #{record.content,jdbcType=LONGVARCHAR}
+      content = #{record.content,jdbcType=LONGVARCHAR},
+      cover = #{record.cover,jdbcType=VARCHAR}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -359,7 +370,8 @@
       comments_num = #{record.commentsNum,jdbcType=INTEGER},
       allow_comment = #{record.allowComment,jdbcType=BIT},
       allow_ping = #{record.allowPing,jdbcType=BIT},
-      allow_feed = #{record.allowFeed,jdbcType=BIT}
+      allow_feed = #{record.allowFeed,jdbcType=BIT},
+      cover = #{record.cover}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -412,6 +424,9 @@
       <if test="content != null">
         content = #{content,jdbcType=LONGVARCHAR},
       </if>
+      <if test="cover != null">
+        cover = #{cover,jdbcType=VARCHAR},
+      </if>
     </set>
     where cid = #{cid,jdbcType=INTEGER}
   </update>
@@ -431,7 +446,8 @@
       allow_comment = #{allowComment,jdbcType=BIT},
       allow_ping = #{allowPing,jdbcType=BIT},
       allow_feed = #{allowFeed,jdbcType=BIT},
-      content = #{content,jdbcType=LONGVARCHAR}
+      content = #{content,jdbcType=LONGVARCHAR},
+      cover = #{cover,jdbcType=VARCHAR}
     where cid = #{cid,jdbcType=INTEGER}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.my.blog.website.modal.Vo.ContentVo">
@@ -449,7 +465,8 @@
       comments_num = #{commentsNum,jdbcType=INTEGER},
       allow_comment = #{allowComment,jdbcType=BIT},
       allow_ping = #{allowPing,jdbcType=BIT},
-      allow_feed = #{allowFeed,jdbcType=BIT}
+      allow_feed = #{allowFeed,jdbcType=BIT},
+      cover= #{cover,jdbcType=VARCHAR}
     where cid = #{cid,jdbcType=INTEGER}
   </update>
 

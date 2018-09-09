@@ -105,6 +105,7 @@ CREATE TABLE `t_contents` (
   `allow_comment` tinyint(1) DEFAULT '1',
   `allow_ping` tinyint(1) DEFAULT '1',
   `allow_feed` tinyint(1) DEFAULT '1',
+  `cover` varchar(200) DEFAULT NULL,
   PRIMARY KEY (`cid`),
   UNIQUE KEY `slug` (`slug`),
   KEY `created` (`created`)

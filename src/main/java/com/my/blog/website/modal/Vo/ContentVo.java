@@ -86,6 +86,11 @@ public class ContentVo implements Serializable {
      */
     private String content;
 
+    /**
+     * 封面
+     */
+    private String cover;
+
     private static final long serialVersionUID = 1L;
 
     public Integer getCid() {
@@ -214,5 +219,12 @@ public class ContentVo implements Serializable {
 
     public void setContent(String content) {
         this.content = content;
+    }
+    public String getCover() {
+        return cover;
+    }
+
+    public void setCover(String cover) {
+        this.cover = cover;
     }
 }
