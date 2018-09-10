@@ -3,7 +3,7 @@
 <mapper namespace="com.my.blog.website.dao.MediaVoMapper">
   <resultMap id="BaseResultMap" type="com.my.blog.website.modal.Vo.MediaVo">
     <id column="id" jdbcType="INTEGER" property="id" />
-    <result column="contentId" jdbcType="INTEGER" property="contentId"
+    <result column="contentId" jdbcType="INTEGER" property="contentId"/>
     <result column="mediaUrl" jdbcType="VARCHAR" property="mediaUrl" />
     <result column="mediaType" jdbcType="VARCHAR" property="mediaType" />
     <result column="created_date" jdbcType="TIMESTAMP" property="created_date" />
