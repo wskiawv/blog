@@ -41,6 +41,9 @@
                                        </th:block>
                                     </td>
                                     <td>
+                                        <a href="javascript:void(0)" th:onclick="'relationMedia('+${post.cid}+');'"
+                                           class="btn btn-info btn-sm waves-effect waves-light m-b-5"><i
+                                                class="fa fa-edit"></i> <span>关联多媒体</span></a>
                                         <a th:href="@{'/admin/article/'+${post.cid}}"
                                            class="btn btn-primary btn-sm waves-effect waves-light m-b-5"><i
                                                 class="fa fa-edit"></i> <span>编辑</span></a>
@@ -85,6 +88,42 @@
                 });
             }
         });
+    }
+    function relationMedia(cid){
+        swal({
+          title: '请输入视频或音频网址',
+         // input: 'text',
+          showCancelButton: true,
+          showCloseButton: true,
+          confirmButtonText: '保存',
+          cancelButtonText: '取消',
+          html:
+            '<input id="swal-input1" class="swal2-input" autofocus>' +
+            '<input id="swal-input2" type="radio" name="mediaType" value="video" class="">视频'+
+            '<input id="swal-input3" type="radio" name="mediaType" value="audio" class="audio">音频'+
+            '<input id="swal-input4" type="radio" name="mediaType" value="image" class="image">图像',
+          preConfirm: function() {
+            return new Promise(function(resolve) {
+                var mediaUrl=$('#swal-input1').val();
+                var mediaType=$('input[name="mediaType"]:checked').val();
+                debugger;
+                resolve([
+                  mediaUrl,
+                  mediaType
+                ]);
+
+            });
+          }
+
+        }).then(function(result) {
+          if (result) {
+            swal({
+              type: 'success',
+              html: '添加成功' + result
+            });
+          }
+        })
+
     }
     /*]]>*/
 </script>

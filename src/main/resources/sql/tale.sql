@@ -290,3 +290,13 @@ CREATE TABLE `t_att` (
   KEY `created` (`created`)
 ) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
 -- Dump completed on 2017-06-22 11:20:50
+ALTER table t_contents ADD cover varchar(1000) default null;
+DROP TABLE IF EXISTS `t_media`;
+CREATE TABLE `t_media` (
+                `id` int(10) unsigned NOT NULL AUTO_INCREMENT primary key,
+                `contentId` int(10) unsigned not null,
+                `mediaUrl` varchar(1000) DEFAULT NULL,
+                `mediaType` varchar(1000) DEFAULT NULL,
+                `created_date` date default null,
+                `create_by` int(10) unsigned default null
+ )
