@@ -20,10 +20,10 @@ public interface IMediaService {
     /**
      * 保存媒体资源
      *
-     * @param params
+     * @param mediaVo
 
      */
-    void save(Map params);
+    void save(MediaVo mediaVo);
 
     /**
      * 根据媒体资源id查询媒体资源

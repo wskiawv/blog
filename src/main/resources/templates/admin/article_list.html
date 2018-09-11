@@ -106,11 +106,21 @@
             return new Promise(function(resolve) {
                 var mediaUrl=$('#swal-input1').val();
                 var mediaType=$('input[name="mediaType"]:checked').val();
-                debugger;
-                resolve([
-                  mediaUrl,
-                  mediaType
-                ]);
+                tale.post({
+                    url : '/admin/media/save',
+                    data: {contentId: cid,mediaUrl:mediaUrl,mediaType:mediaType},
+                    success: function (result) {
+                        if(result && result.success){
+                            tale.alertOkAndReload('保存成功');
+
+                        } else {
+                            tale.alertError(result.msg || '保存失败');
+                        }
+                        resolve(result);
+                    }
+                });
+
+
 
             });
           }
@@ -119,7 +129,7 @@
           if (result) {
             swal({
               type: 'success',
-              html: '添加成功' + result
+              html: result
             });
           }
         })

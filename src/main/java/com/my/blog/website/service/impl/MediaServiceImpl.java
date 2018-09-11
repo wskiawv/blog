@@ -32,8 +32,8 @@ public class MediaServiceImpl implements IMediaService{
     }
 
     @Override
-    public void save(Map params) {
-        mediaVoMapper.insertMedia(params);
+    public void save(MediaVo mediaVo) {
+        mediaVoMapper.insertMedia(mediaVo);
     }
 
     @Override
