@@ -16,7 +16,7 @@ import javax.servlet.http.HttpServletRequest;
 import java.util.Date;
 
 @Controller
-@RequestMapping("admin/media")
+@RequestMapping("/admin/media")
 public class MediaController extends BaseController {
     private static final Logger LOGGER = LoggerFactory.getLogger(MediaController.class);
     @Resource
@@ -44,7 +44,7 @@ public class MediaController extends BaseController {
         request.setAttribute("mediaList",pages);
         return "admin/media";
     }
-    @RequestMapping(value = "/delete")
+    @RequestMapping(value = "/remove")
     @ResponseBody
     public RestResponseBo delete(@RequestParam int id){
         try {

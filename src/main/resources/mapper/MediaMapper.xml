@@ -9,7 +9,7 @@
     <result column="created_date" jdbcType="TIMESTAMP" property="created_date"/>
     <result column="create_by" jdbcType="INTEGER" property="create_by"/>
   </resultMap>
-  <select id="getMedia" parameterType="java.lang.Integer" resultMap="com.my.blog.website.modal.Vo.MediaVo">
+  <select id="getMedia" parameterType="java.lang.Integer" resultType="com.my.blog.website.modal.Vo.MediaVo">
     select 
     *
     from t_media
@@ -30,7 +30,7 @@
   <select id="count" parameterType="java.lang.Integer" resultType="Integer">
     select count(*) from t_media where contentId = #{id,jdbcType=INTEGER}
   </select>
-  <select id="getMediaList" parameterType="java.lang.Integer" resultMap="com.my.blog.website.modal.Vo.MediaVo">
+  <select id="getMediaList" parameterType="java.lang.Integer" resultType="com.my.blog.website.modal.Vo.MediaVo">
     select
     *
     from t_media
