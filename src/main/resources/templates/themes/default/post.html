@@ -8,7 +8,7 @@
         <h1 class="post-title" itemprop="name headline">
             <a th:href="${commons.permalink(article)}" th:text="${article.title}" data-no-instant=""></a>
         </h1>
-
+        <input type="hidden" name="contentId" id="contentId" th:value="${article.cid}"/>
         <div class="post-data">
           <span th:text="#{message.publish}"></span>  <time th:datetime="${commons.fmtdate(article.created)}" itemprop="datePublished"  th:text="${commons.fmtdate(article.created)}"></time>
             <th:block th:utext="${commons.show_categories(article.categories)}"/> / <a href="#comments" th:text="${article.commentsNum ?: 0}+#{commnet.number}"></a> /
@@ -17,6 +17,12 @@
     </div>
     <div id="post-content" class="post-content" itemprop="articleBody">
         <p class="post-tags" th:utext="${commons.show_tags(article.tags)}"></p>
+        <video id="videoPlay" class="video-js vjs-default-skin vjs-big-play-centered" width="600px" height="450px"
+               controls="true" preload="none" th:poster='@{/admin/images/logo.png}'
+              >
+
+        </video>
+        <br/>
         <div class="jq22-container">
             <article class="container">
                 <section>

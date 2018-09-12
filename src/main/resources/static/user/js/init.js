@@ -1,5 +1,75 @@
 $(document).ready(function(){
+ function loadMedia(){
+     var contentId=$("#contentId").val();
+     var mediaUrl='/getMediaList';
+     $.ajax({
+       type: 'POST',
+       url: mediaUrl,
+       data: {contentId:contentId},
+       dataType:'json',
+       success: function(res){
+            if(res.success){
+               var videoList=[];
+               var data=res.result;
+               var len=data.length;
+               for(var i=0;i<len;i++){
+                  var o={src:data[i].mediaUrl,type:'application/x-mpegURL'};
+                  videoList.push(o);
+               }
 
+               if(len>0){
+                setVideoPlay(videoList);
+               }else{
+                    $('#videoPlay').remove();
+               }
+
+            }
+       }
+     });
+
+ }
+ loadMedia();
+ function setVideoPlay(videoList){
+    var curr=1;
+     //var videoList=[{src:'http://edubucket-1252307104.cosgz.myqcloud.com/videoPath/oceans.m3u8',type:'application/x-mpegURL'}];
+     var player = videojs('videoPlay',{
+                 width:600,//宽string|number
+                 height:450,//高：string|number
+                 controls:true,//控制条：boolean
+                 preload:"none",//预加载：string；'auto'|'true'|'metadata'|'none'
+                 poster:'/user/img/logo.png',//预览图：string
+                 autoplay:false,//自动播放：boolean
+                 loop:false,//循环：boolean
+                 muted:false,//静音：boolean
+                 sources:videoList,
+                 controlBar: {
+                     muteToggle: false,
+                     volumeMenuButton:true//静音按钮
+                 }
+             },function onPlayerReady(){
+                 var videoMe = this;
+                 videojs.log('ok');
+                 this.on('ended',function(){
+                     videojs.log('ended')
+                     debugger;
+                     var videoMe=this;
+                     var len=videoList.length;
+                     if(curr>=len){
+                        curr=0;
+                     }else{
+                         var url=videoList[curr];
+                         videoMe.reset();
+                         videoMe.src(url);
+                         videoMe.load(url);
+                         videoMe.play();
+                     }
+                     curr++;
+                 })
+                 this.on('timeupdate',function (e){
+                     videojs.log(videoMe.currentTime())
+                 })
+            });
+ }
  function init(){
           var imgArray=$('#post-content img');
           var imgSrcArray=[];

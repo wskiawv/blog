@@ -3,6 +3,7 @@ package com.my.blog.website.service;
 import com.github.pagehelper.PageInfo;
 import com.my.blog.website.modal.Vo.MediaVo;
 
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -16,7 +17,7 @@ public interface IMediaService {
      * @return
      */
     PageInfo<MediaVo> getMediaList(Integer contentId,Integer page, Integer limit);
-
+    List<MediaVo> ListById(Integer contentId);
     /**
      * 保存媒体资源
      *

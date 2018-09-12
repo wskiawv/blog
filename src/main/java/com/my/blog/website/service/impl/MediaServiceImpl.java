@@ -32,6 +32,11 @@ public class MediaServiceImpl implements IMediaService{
     }
 
     @Override
+    public List<MediaVo> ListById(Integer contentId) {
+        return mediaVoMapper.getMediaList(contentId);
+    }
+
+    @Override
     public void save(MediaVo mediaVo) {
         mediaVoMapper.insertMedia(mediaVo);
     }

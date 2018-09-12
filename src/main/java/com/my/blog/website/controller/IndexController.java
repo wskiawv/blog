@@ -8,17 +8,16 @@ import com.my.blog.website.dto.Types;
 import com.my.blog.website.exception.TipException;
 import com.my.blog.website.modal.Bo.ArchiveBo;
 import com.my.blog.website.modal.Bo.RestResponseBo;
+import com.my.blog.website.modal.Message;
 import com.my.blog.website.modal.Vo.CommentVo;
+import com.my.blog.website.modal.Vo.MediaVo;
 import com.my.blog.website.modal.Vo.MetaVo;
-import com.my.blog.website.service.IMetaService;
-import com.my.blog.website.service.ISiteService;
+import com.my.blog.website.service.*;
 import com.my.blog.website.utils.PatternKit;
 import com.my.blog.website.utils.TaleUtils;
 import com.vdurmont.emoji.EmojiParser;
 import com.my.blog.website.modal.Bo.CommentBo;
 import com.my.blog.website.modal.Vo.ContentVo;
-import com.my.blog.website.service.ICommentService;
-import com.my.blog.website.service.IContentService;
 import com.my.blog.website.utils.IPKit;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
@@ -54,6 +53,9 @@ public class IndexController extends BaseController {
 
     @Resource
     private ISiteService siteService;
+
+    @Resource
+    private IMediaService iMediaService;
 
     /**
      * 首页
@@ -413,4 +415,27 @@ public class IndexController extends BaseController {
         response.addCookie(cookie);
     }
 
+    /**
+     * 获取视频
+     * @param contentId
+     * @return
+     */
+    @PostMapping(value = "/getMediaList")
+    @ResponseBody
+    public Object getMediaList(int contentId){
+        Message msg=new Message();
+        List<MediaVo> list= null;
+        try {
+            msg.setTitle("温馨提示");
+            list = iMediaService.ListById(contentId);
+            msg.setMsg("获取数据成功！");
+            msg.setSuccess(true);
+            msg.setResult(list);
+        } catch (Exception e) {
+            msg.setTitle("温馨提示");
+            msg.setMsg("获取数据失败！");
+            msg.setSuccess(false);
+        }
+        return msg;
+    }
 }

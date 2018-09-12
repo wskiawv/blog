@@ -3,6 +3,7 @@ package com.my.blog.website.controller.admin;
 import com.github.pagehelper.PageInfo;
 import com.my.blog.website.controller.BaseController;
 import com.my.blog.website.modal.Bo.RestResponseBo;
+import com.my.blog.website.modal.Message;
 import com.my.blog.website.modal.Vo.MediaVo;
 import com.my.blog.website.modal.Vo.UserVo;
 import com.my.blog.website.service.IMediaService;
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import java.util.Date;
+import java.util.List;
 
 @Controller
 @RequestMapping("/admin/media")
@@ -35,6 +37,7 @@ public class MediaController extends BaseController {
         }
         return RestResponseBo.ok();
     }
+
     @GetMapping(value = "")
     public String serach(@RequestParam(value = "page", defaultValue = "1") int page,
                           @RequestParam(value = "limit", defaultValue = "15") int limit,
