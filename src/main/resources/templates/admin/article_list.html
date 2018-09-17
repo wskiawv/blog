@@ -44,6 +44,9 @@
                                         <a href="javascript:void(0)" th:onclick="'relationMedia('+${post.cid}+');'"
                                            class="btn btn-info btn-sm waves-effect waves-light m-b-5"><i
                                                 class="fa fa-edit"></i> <span>关联多媒体</span></a>
+                                        <a th:href="@{'/admin/media/serach'+'?contentId='+${post.cid}}"
+                                           class="btn btn-success btn-sm waves-effect waves-light m-b-5"><i
+                                                class="fa fa-edit"></i> <span>查看多媒体</span></a>
                                         <a th:href="@{'/admin/article/'+${post.cid}}"
                                            class="btn btn-primary btn-sm waves-effect waves-light m-b-5"><i
                                                 class="fa fa-edit"></i> <span>编辑</span></a>
@@ -106,20 +109,26 @@
             return new Promise(function(resolve) {
                 var mediaUrl=$('#swal-input1').val();
                 var mediaType=$('input[name="mediaType"]:checked').val();
-                tale.post({
-                    url : '/admin/media/save',
-                    data: {contentId: cid,mediaUrl:mediaUrl,mediaType:mediaType},
-                    success: function (result) {
-                        if(result && result.success){
-                            tale.alertOkAndReload('保存成功');
+                if(mediaUrl==null || mediaUrl=='' || mediaUrl==undefined){
+                    tale.alertError( '请填写多媒体资源网址！');
+                    return;
+                }else{
+                    tale.post({
+                        url : '/admin/media/save',
+                        data: {contentId: cid,mediaUrl:mediaUrl,mediaType:mediaType},
+                        success: function (result) {
+                            if(result && result.success){
+                                tale.alertOkAndReload('保存成功');
 
-                        } else {
-                            tale.alertError(result.msg || '保存失败');
+                            } else {
+                                tale.alertError(result.msg || '保存失败');
+                            }
+                            debugger;
+                            resolve(result.success);
                         }
-                        debugger;
-                        resolve(result.success);
-                    }
-                });
+                    });
+                }
+
 
 
 

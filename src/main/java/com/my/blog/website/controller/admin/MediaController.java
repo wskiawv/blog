@@ -38,7 +38,7 @@ public class MediaController extends BaseController {
         return RestResponseBo.ok();
     }
 
-    @GetMapping(value = "")
+    @GetMapping(value = "serach")
     public String serach(@RequestParam(value = "page", defaultValue = "1") int page,
                           @RequestParam(value = "limit", defaultValue = "15") int limit,
                           @RequestParam(value = "contentId", defaultValue = "0") int contentId,

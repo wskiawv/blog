@@ -18,22 +18,26 @@
                                 <th width="35%">资源url</th>
                                 <th width="15%">发布时间</th>
                                 <th>资源类型</th>
+                                <th>操作</th>
                             </tr>
                             </thead>
                             <tbody>
                             <th:block th:each="post : ${mediaList.list}">
                                 <tr th:cid="${post.id}">
                                     <td>
-                                        <a th:href="@{'/admin/media/'+${post.id}}" th:text="${post.mediaUtl}"></a>
+                                        <a th:href="@{'/admin/media/'+${post.id}}" th:text="${post.mediaUrl}"></a>
                                     </td>
-                                    <td><th:block th:text="${commons.fmtdate(post.created_date, 'yyyy-MM-dd HH:mm:ss')}"/></td>
+                                    <td><th:block th:text="${#dates.format(post.created_date,'yyyy-MM-dd')}"/></td>
                                     <td><th:block th:text="${post.mediaType}"/></td>
+                                    <td><a href="javascript:void(0)" th:onclick="'delPost('+${post.id}+');'"
+                                           class="btn btn-danger btn-sm waves-effect waves-light m-b-5"><i
+                                            class="fa fa-trash-o"></i> <span>删除</span></a></td>
                                 </tr>
                             </th:block>
 
                             </tbody>
                         </table>
-                        <div th:replace="comm/macros :: pageAdminNav(${articles})"></div>
+                        <div th:replace="comm/macros :: pageAdminNav(${mediaList})"></div>
                     </div>
                 </div>
                 <div th:replace="admin/footer :: footer-content"></div>
@@ -45,13 +49,13 @@
 <script type="text/javascript">
     /*<![CDATA[*/
     var tale = new $.tale();
-    function delPost(cid) {
+    function delPost(id) {
         tale.alertConfirm({
-            title:'确定删除该文章吗?',
+            title:'确定删除该多媒体资源吗?',
             then: function () {
                 tale.post({
-                    url : '/admin/article/delete',
-                    data: {cid: cid},
+                    url : '/admin/media/remove',
+                    data: {id: id},
                     success: function (result) {
                         if(result && result.success){
                             tale.alertOkAndReload('文章删除成功');
