@@ -9,7 +9,8 @@ public class MediaVo implements Serializable {
     private String mediaType;
     private Date created_date;
     private Integer create_by;
-
+    private String mediaImageUrl;
+    private String mediaDescribe;
     public Integer getId() {
         return id;
     }
@@ -56,5 +57,20 @@ public class MediaVo implements Serializable {
 
     public void setCreate_by(Integer create_by) {
         this.create_by = create_by;
+    }
+    public String getMediaImageUrl() {
+        return mediaImageUrl;
+    }
+
+    public void setMediaImageUrl(String mediaImageUrl) {
+        this.mediaImageUrl = mediaImageUrl;
+    }
+
+    public String getMediaDescribe() {
+        return mediaDescribe;
+    }
+
+    public void setMediaDescribe(String mediaDescribe) {
+        this.mediaDescribe = mediaDescribe;
     }
 }
