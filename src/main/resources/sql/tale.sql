@@ -298,5 +298,7 @@ CREATE TABLE `t_media` (
                   `mediaUrl` varchar(1000) DEFAULT NULL,
                   `mediaType` varchar(1000) DEFAULT NULL,
                   `created_date` date default null,
-                  `create_by` int(10) unsigned default null
+                  `create_by` int(10) unsigned default null,
+                  `mediaImageUrl` varchar(1000) DEFAULT NULL,
+                  `mediaDescribe` varchar(255) DEFAULT NULL
    )

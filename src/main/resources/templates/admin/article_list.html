@@ -101,7 +101,9 @@
           confirmButtonText: '保存',
           cancelButtonText: '取消',
           html:
-            '<input id="swal-input1" class="swal2-input" autofocus>' +
+            '资源url：<input id="swal-input1" class="swal2-input" autofocus>' +
+            '封面图片url：<input id="mediaImageUrl" class="swal2-input" autofocus>' +
+            '资源描述：<input id="mediaDescribe" class="swal2-input" autofocus>' +
             '<input id="swal-input2" type="radio" name="mediaType" value="video" class="">视频'+
             '<input id="swal-input3" type="radio" name="mediaType" value="audio" class="audio">音频'+
             '<input id="swal-input4" type="radio" name="mediaType" value="image" class="image">图像',
@@ -109,13 +111,15 @@
             return new Promise(function(resolve) {
                 var mediaUrl=$('#swal-input1').val();
                 var mediaType=$('input[name="mediaType"]:checked').val();
+                var mediaImageUrl=$('#mediaImageUrl').val();
+                var mediaDescribe=$('#mediaDescribe').val();
                 if(mediaUrl==null || mediaUrl=='' || mediaUrl==undefined){
                     tale.alertError( '请填写多媒体资源网址！');
                     return;
                 }else{
                     tale.post({
                         url : '/admin/media/save',
-                        data: {contentId: cid,mediaUrl:mediaUrl,mediaType:mediaType},
+                        data: {contentId: cid,mediaUrl:mediaUrl,mediaType:mediaType,mediaImageUrl:mediaImageUrl,mediaDescribe:mediaDescribe},
                         success: function (result) {
                             if(result && result.success){
                                 tale.alertOkAndReload('保存成功');

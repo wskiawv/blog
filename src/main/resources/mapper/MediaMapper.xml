@@ -8,6 +8,8 @@
     <result column="mediaType" jdbcType="VARCHAR" property="mediaType"/>
     <result column="created_date" jdbcType="TIMESTAMP" property="created_date"/>
     <result column="create_by" jdbcType="INTEGER" property="create_by"/>
+    <result column="mediaImageUrl" jdbcType="VARCHAR" property="mediaImageUrl"/>
+    <result column="mediaDescribe" jdbcType="VARCHAR" property="mediaDescribe"/>
   </resultMap>
   <select id="getMedia" parameterType="java.lang.Integer" resultType="com.my.blog.website.modal.Vo.MediaVo">
     select 
@@ -21,10 +23,11 @@
   </delete>
   <insert id="insertMedia" parameterType="com.my.blog.website.modal.Vo.MediaVo" useGeneratedKeys="true" keyProperty="id">
     insert into t_media (id, contentId, mediaUrl,
-      mediaType, created_date, create_by
+      mediaType, created_date, create_by, mediaImageUrl, mediaDescribe
       )
     values (#{id,jdbcType=INTEGER}, #{contentId,jdbcType=INTEGER}, #{mediaUrl,jdbcType=VARCHAR},
-      #{mediaType,jdbcType=VARCHAR}, #{created_date,jdbcType=TIMESTAMP}, #{create_by,jdbcType=INTEGER}
+      #{mediaType,jdbcType=VARCHAR}, #{created_date,jdbcType=TIMESTAMP}, #{create_by,jdbcType=INTEGER},
+      #{mediaImageUrl,jdbcType=VARCHAR},#{mediaDescribe,jdbcType=VARCHAR}
       )
   </insert>
   <select id="count" parameterType="java.lang.Integer" resultType="Integer">
