@@ -63,6 +63,7 @@ $(document).ready(function(){
                       if(curr>=len){
                          curr=0;
                       }else{
+                          videoMe.reset();
                           videoMe.playlist.currentItem(curr);
                           videoMe.play();
                       }
