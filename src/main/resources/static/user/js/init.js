@@ -10,15 +10,22 @@ $(document).ready(function(){
        success: function(res){
             if(res.success){
                var videoList=[];
+               var videoplayList=[];
                var data=res.result;
                var len=data.length;
                for(var i=0;i<len;i++){
                   var o={src:data[i].mediaUrl,type:'application/x-mpegURL'};
+                  var v={sources: [{
+                             src: data[i].mediaUrl,
+                             type: 'application/x-mpegURL'
+                           }],
+                           poster: data[i].mediaImageUrl};
+                  videoplayList.push(v);
                   videoList.push(o);
                }
-
                if(len>0){
-                setVideoPlay(videoList);
+                //setVideoPlay(videoplayList);
+                setVideoPlayList(videoplayList);
                }else{
                     $('#videoPlay').remove();
                }
@@ -29,12 +36,59 @@ $(document).ready(function(){
 
  }
  loadMedia();
+ function setVideoPlayList(videoplayList){
+     var curr=1;
+
+      var player = videojs('videoPlay',{
+                  fluid: true,
+                  controls:true,//控制条：boolean
+                  preload:"none",//预加载：string；'auto'|'true'|'metadata'|'none'
+                  poster:'/user/img/logo.png',//预览图：string
+                  autoplay:false,//自动播放：boolean
+                  loop:false,//循环：boolean
+                  muted:false,//静音：boolean
+                  //sources:videoList,
+                  controlBar: {
+                      muteToggle: false,
+                      volumeMenuButton:true//静音按钮
+                  }
+              },function onPlayerReady(){
+                  var videoMe = this;
+                  videojs.log('ok');
+                  this.on('ended',function(){
+                      videojs.log('ended')
+                      debugger;
+                      //var videoMe=this;
+                      var len=videoplayList.length;
+                      if(curr>=len){
+                         curr=0;
+                      }else{
+                          videoMe.playlist.currentItem(curr);
+                          videoMe.play();
+                      }
+                      curr++;
+                  })
+                  this.on('timeupdate',function (e){
+                      //videojs.log(videoMe.currentTime())
+                  })
+             });
+             player.on([
+               'duringplaylistchange',
+               'playlistchange',
+               'beforeplaylistitem',
+               'playlistitem',
+               'playlistsorted'
+             ], function(e) {
+               videojs.log('player saw "' + e.type + '"');
+             });
+             player.playlist(videoplayList);
+             player.playlist.currentItem(0);
+  }
  function setVideoPlay(videoList){
     var curr=1;
      //var videoList=[{src:'http://edubucket-1252307104.cosgz.myqcloud.com/videoPath/oceans.m3u8',type:'application/x-mpegURL'}];
      var player = videojs('videoPlay',{
-                 width:600,//宽string|number
-                 height:450,//高：string|number
+                 fluid: true,
                  controls:true,//控制条：boolean
                  preload:"none",//预加载：string；'auto'|'true'|'metadata'|'none'
                  poster:'/user/img/logo.png',//预览图：string
@@ -134,21 +188,3 @@ $(document).ready(function(){
         timingFunction: 'cubic-bezier(0.38, 0.96, 0.7, 0.07)',
         sliderHeight: '30%'});
 });
-/*$(window).load(function() {
-
-      $('#full_feature').swipeslider();
-      $('#content_slider').swipeslider({
-        transitionDuration: 600,
-        autoPlayTimeout: 10000,
-        sliderHeight: '300px'
-      });
-      $('#responsiveness').swipeslider();
-      $('#customizability').swipeslider({
-        transitionDuration: 1500,
-        autoPlayTimeout: 4000,
-        timingFunction: 'cubic-bezier(0.38, 0.96, 0.7, 0.07)',
-        sliderHeight: '30%'});
-
-
-
- });*/

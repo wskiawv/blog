@@ -8,7 +8,7 @@
     <meta http-equiv="Cache-Control" content="no-transform"/>
     <meta http-equiv="Cache-Control" content="no-siteapp"/>
     <meta name="keywords" th:content="${keywords ?: commons.site_option('site_keywords')}"/>
-    <meta name="description" th:content="${description ?:commons.site_option('site_description')}"/>
+    <meta name="baidu_union_verify" content="508cc7a68c023681d7231f26b6f6bbaa"/>
     <link rel="shortcut icon" th:href="@{/user/img/favicon.png}"/>
     <link rel="apple-touch-icon" th:href="@{/user/img/apple-touch-icon.png}"/>
     <title><th:block th:text="${title ?: 'Home'}+' - '+${commons.site_option('site_title','My Blog')}"></th:block></title>
@@ -30,6 +30,13 @@
     <script src="//vjs.zencdn.net/ie8/1.1.2/videojs-ie8.min.js"></script>
     <script th:src="@{/user/plugins/videojs/videojs-contrib-hls.min.js}"></script>
     <script th:src="@{/user/plugins/videojs/videojs-playlist.js}"></script>
+    <script src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    <script>
+      (adsbygoogle = window.adsbygoogle || []).push({
+        google_ad_client: "ca-pub-6300715167550889",
+        enable_page_level_ads: true
+       });
+    </script>
     <style>
 
         .video-js .vjs-control-bar {
