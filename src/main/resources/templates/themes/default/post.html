@@ -17,11 +17,18 @@
     </div>
     <div id="post-content" class="post-content" itemprop="articleBody">
         <p class="post-tags" th:utext="${commons.show_tags(article.tags)}"></p>
-        <video id="videoPlay" class="video-js vjs-default-skin vjs-big-play-centered"
+        <div id="blueimp-video-carousel" class="blueimp-gallery blueimp-gallery-controls blueimp-gallery-carousel">
+            <div class="slides"></div>
+            <h3 class="title"></h3>
+            <a class="prev">‹</a>
+            <a class="next">›</a>
+            <a class="play-pause"></a>
+        </div>
+        <!--<video id="videoPlay" class="video-js vjs-default-skin vjs-big-play-centered"
                controls="true" preload="none" th:poster='@{/admin/images/logo.png}'
               >
 
-        </video>
+        </video>-->
         <br/>
         <div class="jq22-container">
             <article class="container">
@@ -80,6 +87,15 @@
 <div th:replace="themes/default/comments::comments"></div>
 <div th:replace="themes/default/footer::footer"></div>
 </body>
+<script th:src="@{/user/plugins/gallery/blueimp-helper.js}"></script>
+<script th:src="@{/user/plugins/gallery/blueimp-gallery.js}"></script>
+<script th:src="@{/user/plugins/gallery/blueimp-gallery-fullscreen.js}"></script>
+<script th:src="@{/user/plugins/gallery/blueimp-gallery-indicator.js}"></script>
+<script th:src="@{/user/plugins/gallery/blueimp-gallery-video.js}"></script>
+<script th:src="@{/user/plugins/gallery/blueimp-gallery-vimeo.js}"></script>
+<script th:src="@{/user/plugins/gallery/blueimp-gallery-youtube.js}"></script>
+<!--<script th:src="@{/user/plugins/gallery/jquery.js}"></script>-->
+<script th:src="@{/user/plugins/gallery/jquery.blueimp-gallery.js}"></script>
 <script th:src="@{/user/js/photoswipe.min.js}"></script>
 <script th:src="@{/user/js/photoswipe-ui-default.min.js}"></script>
 <script th:src="@{/user/js/init.js}"></script>

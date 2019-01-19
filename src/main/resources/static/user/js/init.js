@@ -11,6 +11,7 @@ $(document).ready(function(){
             if(res.success){
                var videoList=[];
                var videoplayList=[];
+               var videolist=[];
                var data=res.result;
                var len=data.length;
                for(var i=0;i<len;i++){
@@ -20,14 +21,22 @@ $(document).ready(function(){
                              type: 'application/x-mpegURL'
                            }],
                            poster: data[i].mediaImageUrl};
+                  var vi={ title: data[i].mediaDescribe,
+                           href: data[i].mediaUrl,
+                           type: 'video/mp4',
+                           poster: data[i].mediaImageUrl
+                         };
                   videoplayList.push(v);
                   videoList.push(o);
+                  videolist.push(vi);
                }
                if(len>0){
                 //setVideoPlay(videoplayList);
-                setVideoPlayList(videoplayList);
+                //setVideoPlayList(videoplayList);
+                initGallery(videolist);
                }else{
-                    $('#videoPlay').remove();
+                    //$('#videoPlay').remove();
+                    $('##blueimp-video-carousel').remove();
                }
 
             }
@@ -36,6 +45,50 @@ $(document).ready(function(){
 
  }
  loadMedia();
+ function initGallery(videolist){
+    var gallery= blueimp.Gallery(videolist, {
+        container: '#blueimp-video-carousel',
+        carousel: true,
+        videoClass:'video-js vjs-default-skin vjs-big-play-centered'
+      });
+    var videoArray=$('video');
+    for(var i=0;i<videoArray.length;i++){
+      $(videoArray[i]).attr('id','video'+i);
+      var videoId='video'+i;
+      var obj=videolist[i];
+      var player=videojs(videoId,{
+                fluid: true,
+                controls:true,//控制条：boolean
+                preload:"none",//预加载：string；'auto'|'true'|'metadata'|'none'
+                poster:obj.poster,//预览图：string
+                autoplay:false,//自动播放：boolean
+                loop:false,//循环：boolean
+                muted:false,//静音：boolean
+                //sources:videoList,
+                controlBar: {
+                    muteToggle: false,
+                    volumeMenuButton:true//静音按钮
+                }
+      });
+      player.on([
+               'duringplaylistchange',
+               'playlistchange',
+               'beforeplaylistitem',
+               'playlistitem',
+               'playlistsorted'
+             ], function(e) {
+               videojs.log('player saw "' + e.type + '"');
+             });
+      var videoList=[{
+        sources: [{
+          src: obj.href,
+          type: 'application/x-mpegURL'
+        }],
+        poster: obj.poster
+      }];
+      player.playlist(videoList);
+    }
+ }
  function setVideoPlayList(videoplayList){
      var curr=1;
 
