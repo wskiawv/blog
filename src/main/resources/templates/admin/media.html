@@ -17,7 +17,9 @@
                             <tr>
                                 <th width="35%">资源url</th>
                                 <th width="15%">发布时间</th>
-                                <th>资源类型</th>
+                                <th width="10%">资源类型</th>
+                                <th width="20%">封面图片</th>
+                                <th width="10%">资源描述</th>
                                 <th>操作</th>
                             </tr>
                             </thead>
@@ -29,6 +31,8 @@
                                     </td>
                                     <td><th:block th:text="${#dates.format(post.created_date,'yyyy-MM-dd')}"/></td>
                                     <td><th:block th:text="${post.mediaType}"/></td>
+                                    <td><th:block th:text="${post.mediaImageUrl}"/></td>
+                                    <td><th:block th:text="${post.mediaDescribe}"/></td>
                                     <td><a href="javascript:void(0)" th:onclick="'delPost('+${post.id}+');'"
                                            class="btn btn-danger btn-sm waves-effect waves-light m-b-5"><i
                                             class="fa fa-trash-o"></i> <span>删除</span></a></td>
