@@ -2,7 +2,10 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:yh="http://www.thymeleaf.org">
 <div th:replace="themes/default/header::header(${article.title},${article.tags})"></div>
 <body>
-
+<script src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
 <article class="main-content post-page" itemscope="" itemtype="http://schema.org/Article">
     <div class="post-header">
         <h1 class="post-title" itemprop="name headline">
@@ -40,6 +43,12 @@
                 </section>
             </article>
         </div>
+        <ins class="adsbygoogle"
+             style="display:block; text-align:center;"
+             data-ad-layout="in-article"
+             data-ad-format="fluid"
+             data-ad-client="ca-pub-6300715167550889"
+             data-ad-slot="4532019022"></ins>
         <th:block th:utext="${commons.article(article.content)}"/>
         <p class="post-info">
             <br/><span th:text="#{comment.editTime}"></span>:
@@ -99,4 +108,5 @@
 <script th:src="@{/user/js/photoswipe.min.js}"></script>
 <script th:src="@{/user/js/photoswipe-ui-default.min.js}"></script>
 <script th:src="@{/user/js/init.js}"></script>
+
 </html>
