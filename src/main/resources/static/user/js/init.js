@@ -36,7 +36,7 @@ $(document).ready(function(){
                 initGallery(videolist);
                }else{
                     //$('#videoPlay').remove();
-                    $('##blueimp-video-carousel').remove();
+                    $('#blueimp-video-carousel').remove();
                }
 
             }

@@ -1,20 +1,17 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org" th:fragment="footer">
 <body>
-<script src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-<!-- mysecondadvert -->
-<script>
-    (adsbygoogle = window.adsbygoogle || []).push({});
-    </script>
-<ins class="adsbygoogle"
-     style="display:block"
-     data-ad-client="ca-pub-6300715167550889"
-     data-ad-slot="3637616045"
-     data-ad-format="auto"
-     data-full-width-responsive="true"></ins>
+
+
 <footer class="footer bg-white">
     <div class="footer-social">
         <div class="footer-container clearfix">
+            <ins class="adsbygoogle"
+                 style="display:block"
+                 data-ad-client="ca-pub-6300715167550889"
+                 data-ad-slot="3637616045"
+                 data-ad-format="auto"
+                 data-full-width-responsive="true"></ins>
             <div class="social-list">
                 <th:block th:each="index:${commons.social()}">
                     <th:block th:if="${index.value}!=null and ${index.value}!=''">
@@ -68,6 +65,9 @@
     <div id="directory-content" class="directory-content">
         <div id="directory"></div>
     </div>
+    <script>
+    (adsbygoogle = window.adsbygoogle || []).push({});
+    </script>
     <script>
         /*<![CDATA[*/
         var postDirectoryBuild = function () {
