@@ -39,6 +39,23 @@
     <script src="//vjs.zencdn.net/ie8/1.1.2/videojs-ie8.min.js"></script>
     <script th:src="@{/user/plugins/videojs/videojs-contrib-hls.min.js}"></script>
     <script th:src="@{/user/plugins/videojs/videojs-playlist.js}"></script>
+    <script>
+     function change(lang){
+            $.ajax({
+                type:'post',
+                url:'/changeLang',
+                dataType:'json',
+                data:{lang:lang},
+                success:function(data){
+                if(data.success){
+                    location.reload();
+                }
+                },error:function(data){
+
+                }
+            });
+        }
+    </script>
     <script src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
     <script>
       (adsbygoogle = window.adsbygoogle || []).push({
@@ -71,6 +88,8 @@
             <a th:href="${commons.site_url('/archives')}"><span th:text="#{archives}"></span></a>
             <a th:href="${commons.site_url('/links')}"><span th:text="#{link}"></span></a>
             <a th:href="${commons.site_url('/about')}"><span th:text="#{about}"></span></a>
+            <a  href="javascript:void(0)"><span th:text="#{user.menu.en}" onclick="change('en')"></span></a>
+            <a  href="javascript:void(0)"><span th:text="#{user.menu.cn}" onclick="change('cn')"></span></a>
         </div>
         <div class="navbar-search" onclick="">
             <span class="icon-search"></span>
@@ -111,6 +130,8 @@
                 <li><a th:href="${commons.site_url('/archives')}"><span th:text="#{archives}"></span></a></li>
                 <li><a th:href="${commons.site_url('/links')}"><span th:text="#{link}"></span></a></li>
                 <li><a th:href="${commons.site_url('/about')}"><span th:text="#{about}"></span></a></li>
+                <li><a  href="javascript:void(0)"><span th:text="#{user.menu.en}" onclick="change('en')"></span></a></li>
+                <li><a  href="javascript:void(0)"><span th:text="#{user.menu.cn}" onclick="change('cn')"></span></a></li>
                 <!--<li class="dropdown">
                     <a class="dropdown-toggle" href="#" data-toggle="dropdown" ><span th:text="#{user.menu.language}"></span></a>
                     <ul class="dropdown-menu" >

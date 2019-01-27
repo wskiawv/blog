@@ -22,9 +22,14 @@ import com.my.blog.website.utils.IPKit;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.LocaleResolver;
+import org.springframework.web.servlet.i18n.SessionLocaleResolver;
+import org.springframework.web.servlet.support.RequestContextUtils;
 
 import javax.annotation.Resource;
 import javax.servlet.http.Cookie;
@@ -33,6 +38,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.net.URLEncoder;
 import java.util.List;
+import java.util.Locale;
 
 /**
  * 首页
@@ -56,6 +62,8 @@ public class IndexController extends BaseController {
 
     @Resource
     private IMediaService iMediaService;
+   /* @Autowired
+    private LocaleResolver localeResolver;*/
 
     /**
      * 首页
@@ -417,14 +425,15 @@ public class IndexController extends BaseController {
 
     /**
      * 获取视频
+     *
      * @param contentId
      * @return
      */
     @PostMapping(value = "/getMediaList")
     @ResponseBody
-    public Object getMediaList(int contentId){
-        Message msg=new Message();
-        List<MediaVo> list= null;
+    public Object getMediaList(int contentId) {
+        Message msg = new Message();
+        List<MediaVo> list = null;
         try {
             msg.setTitle("温馨提示");
             list = iMediaService.ListById(contentId);
@@ -436,6 +445,28 @@ public class IndexController extends BaseController {
             msg.setMsg("获取数据失败！");
             msg.setSuccess(false);
         }
+        return msg;
+    }
+
+    /**
+     * 更换语言
+     *
+     * @param lang
+     * @return
+     */
+    @PostMapping(value = "/changeLang")
+    @ResponseBody
+    public Object changeLang(String lang, HttpServletRequest request, HttpServletResponse response) {
+        Message msg = new Message();
+        LocaleResolver localeResolver = RequestContextUtils.getLocaleResolver(request);
+        if ("cn".equals(lang)) {
+            localeResolver.setLocale(request, response, new Locale("zh", "CN"));
+        } else if ("en".equals(lang)) {
+            localeResolver.setLocale(request, response, new Locale("en", "US"));
+        }
+        msg.setMsg("更换语言成功！");
+        msg.setTitle("温馨提示");
+        msg.setSuccess(true);
         return msg;
     }
 }

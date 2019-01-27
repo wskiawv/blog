@@ -11,8 +11,8 @@
         <input type="hidden" name="contentId" id="contentId" th:value="${article.cid}"/>
         <div class="post-data">
           <span th:text="#{message.publish}"></span>  <time th:datetime="${commons.fmtdate(article.created)}" itemprop="datePublished"  th:text="${commons.fmtdate(article.created)}"></time>
-            <th:block th:utext="${commons.show_categories(article.categories)}"/> / <a href="#comments" th:text="${article.commentsNum ?: 0}+#{commnet.number}"></a> /
-            <th:block th:text="${article.hits}"/><span th:text="#{commnet.browse}"></span>
+            <th:block th:utext="${commons.show_categories(article.categories)}"/> / <a href="#comments" th:text="${article.commentsNum ?: 0}+' '+#{commnet.number}"></a> /
+            <th:block th:text="${article.hits}"/> <span th:text="#{commnet.browse}"></span>
         </div>
     </div>
     <div id="post-content" class="post-content" itemprop="articleBody">
