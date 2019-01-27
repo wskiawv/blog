@@ -60,7 +60,7 @@
         </div>
     </div>
 </footer>
-
+<a href="#" id="toTop" style="display: block;"><span id="toTopHover" style="opacity: 0;"></span>To Top</a>
 <th:block th:if="${is_post}">
     <div id="directory-content" class="directory-content">
         <div id="directory"></div>
@@ -215,6 +215,29 @@
     });
     InstantClick.init('mousedown');
     /*]]>*/
+</script>
+<script type="text/javascript">
+    $(document).ready(function() {
+        /*
+            var defaults = {
+            containerID: 'toTop', // fading element id
+            containerHoverID: 'toTopHover', // fading element hover id
+            scrollSpeed: 1200,
+            easingType: 'linear'
+            };
+        */
+
+        $().UItoTop({ easingType: 'easeOutQuart' });
+
+        });
+</script>
+<script type="text/javascript">
+    jQuery(document).ready(function($) {
+        $(".scroll").click(function(event){
+            event.preventDefault();
+            $('html,body').animate({scrollTop:$(this.hash).offset().top},1000);
+        });
+    });
 </script>
 </body>
 </html>

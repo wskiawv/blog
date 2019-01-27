@@ -14,6 +14,7 @@
     <title><th:block th:text="${title ?: 'Home'}+' - '+${commons.site_option('site_title','My Blog')}"></th:block></title>
     <link th:href="@{//cdn.bootcss.com/highlight.js/9.9.0/styles/xcode.min.css}" rel="stylesheet"/>
     <link th:href="@{/user/css/style.min.css}" rel="stylesheet"/>
+    <link th:href="@{/user/css/style.css}" rel="stylesheet"/>
     <link th:href="@{/user/css/swipeslider.css}" rel="stylesheet"/>
     <link th:href="@{/user/css/photoswipe.min.css}" rel="stylesheet"/>
     <link th:href="@{/user/css/default-skin.min.css}" rel="stylesheet"/>
@@ -28,6 +29,10 @@
     <script src="//cdn.bootcss.com/html5shiv/r29/html5.min.js"></script>
     <script src="//cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
+    <!-- Scroll-->
+    <script th:src="@{/user/js/easing.js}"></script>
+    <script th:src="@{/user/js/SmoothScroll.min.js}"></script>
+    <script th:src="@{/user/js/move-top.js}"></script>
     <!--videojs-->
     <script th:src="@{/user/plugins/videojs/video.js}"></script>
     <!--<script src="https://vjs.zencdn.net/7.1.0/video.js"></script>-->
