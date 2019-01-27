@@ -90,6 +90,10 @@ public class ContentVo implements Serializable {
      * 封面
      */
     private String cover;
+    /**
+     * 语言类型
+     */
+    private String languageType;
 
     private static final long serialVersionUID = 1L;
 
@@ -226,5 +230,12 @@ public class ContentVo implements Serializable {
 
     public void setCover(String cover) {
         this.cover = cover;
+    }
+    public String getLanguageType() {
+        return languageType;
+    }
+
+    public void setLanguageType(String languageType) {
+        this.languageType = languageType;
     }
 }

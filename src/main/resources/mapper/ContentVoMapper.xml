@@ -18,6 +18,7 @@
     <result column="allow_ping" jdbcType="BIT" property="allowPing" />
     <result column="allow_feed" jdbcType="BIT" property="allowFeed" />
     <result column="cover" jdbcType="VARCHAR" property="cover" />
+    <result column="languageType" jdbcType="VARCHAR" property="languageType"/>
   </resultMap>
   <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.my.blog.website.modal.Vo.ContentVo">
     <result column="content" jdbcType="LONGVARCHAR" property="content" />
@@ -149,13 +150,13 @@
       type, status, tags, 
       categories, hits, comments_num, 
       allow_comment, allow_ping, allow_feed, 
-      content,cover)
+      content,cover,languageType)
     values (#{cid,jdbcType=INTEGER}, #{title,jdbcType=VARCHAR}, #{slug,jdbcType=VARCHAR}, 
       #{created,jdbcType=INTEGER}, #{modified,jdbcType=INTEGER}, #{authorId,jdbcType=INTEGER}, 
       #{type,jdbcType=VARCHAR}, #{status,jdbcType=VARCHAR}, #{tags,jdbcType=VARCHAR}, 
       #{categories,jdbcType=VARCHAR}, #{hits,jdbcType=INTEGER}, #{commentsNum,jdbcType=INTEGER}, 
       #{allowComment,jdbcType=BIT}, #{allowPing,jdbcType=BIT}, #{allowFeed,jdbcType=BIT}, 
-      #{content,jdbcType=LONGVARCHAR},#{cover,jdbcType=VARCHAR})
+      #{content,jdbcType=LONGVARCHAR},#{cover,jdbcType=VARCHAR},#{languageType,jdbcType=VARCHAR)
   </insert>
   <insert id="insertSelective" parameterType="com.my.blog.website.modal.Vo.ContentVo" useGeneratedKeys="true" keyProperty="cid">
     insert into t_contents
@@ -211,6 +212,10 @@
       <if test="cover != null">
         cover,
       </if>
+      <if test="languageType != null">
+        languageType,
+      </if>
+
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="cid != null">
@@ -264,6 +269,10 @@
       <if test="cover != null">
         #{cover,jdbcType=VARCHAR},
       </if>
+      <if test="languageType != null">
+        #{languageType,jdbcType=VARCHAR},
+      </if>
+
     </trim>
   </insert>
   <select id="countByExample" parameterType="com.my.blog.website.modal.Vo.ContentVoExample" resultType="java.lang.Long">
@@ -326,6 +335,10 @@
       <if test="record.cover != null">
         cover = #{record.cover,jdbcType=VARCHAR},
       </if>
+      <if test="record.languageType != null">
+        cover = #{record.languageType,jdbcType=VARCHAR},
+      </if>
+
     </set>
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
@@ -350,6 +363,7 @@
       allow_feed = #{record.allowFeed,jdbcType=BIT},
       content = #{record.content,jdbcType=LONGVARCHAR},
       cover = #{record.cover,jdbcType=VARCHAR}
+      cover = #{record.languageType,jdbcType=VARCHAR}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -372,6 +386,8 @@
       allow_ping = #{record.allowPing,jdbcType=BIT},
       allow_feed = #{record.allowFeed,jdbcType=BIT},
       cover = #{record.cover}
+      languageType = #{record.languageType}
+
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -427,6 +443,10 @@
       <if test="cover != null">
         cover = #{cover,jdbcType=VARCHAR},
       </if>
+      <if test="languageType != null">
+        cover = #{languageType,jdbcType=VARCHAR},
+      </if>
+
     </set>
     where cid = #{cid,jdbcType=INTEGER}
   </update>
@@ -447,7 +467,8 @@
       allow_ping = #{allowPing,jdbcType=BIT},
       allow_feed = #{allowFeed,jdbcType=BIT},
       content = #{content,jdbcType=LONGVARCHAR},
-      cover = #{cover,jdbcType=VARCHAR}
+      cover = #{cover,jdbcType=VARCHAR},
+      languageType = #{languageType,jdbcType=VARCHAR}
     where cid = #{cid,jdbcType=INTEGER}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.my.blog.website.modal.Vo.ContentVo">
@@ -466,7 +487,8 @@
       allow_comment = #{allowComment,jdbcType=BIT},
       allow_ping = #{allowPing,jdbcType=BIT},
       allow_feed = #{allowFeed,jdbcType=BIT},
-      cover= #{cover,jdbcType=VARCHAR}
+      cover= #{cover,jdbcType=VARCHAR},
+      languageType = #{languageType,jdbcType=VARCHAR}
     where cid = #{cid,jdbcType=INTEGER}
   </update>
 
