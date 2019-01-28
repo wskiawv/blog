@@ -27,7 +27,7 @@ public interface IContentService {
      * @param limit 每页条数
      * @return ContentVo
      */
-    PageInfo<ContentVo> getContents(Integer p, Integer limit);
+    PageInfo<ContentVo> getContents(Integer p, Integer limit,String lang);
 
 
     /**

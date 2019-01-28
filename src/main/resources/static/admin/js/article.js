@@ -38,6 +38,7 @@ function subArticle(status) {
         return;
     }
     $('#content-editor').val(content);
+    $('#languageType').val($('#lang-sel').val());
     $("#articleForm #status").val(status);
     $("#articleForm #categories").val($('#multiple-sel').val());
     var params = $("#articleForm").serialize();

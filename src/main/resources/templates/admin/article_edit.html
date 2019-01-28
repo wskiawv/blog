@@ -48,6 +48,7 @@
                             <input type="hidden" name="allowPing" th:value="${contents!=null and contents.allowPing !=null}?${contents.allowPing}: true" id="allowPing"/>
                             <input type="hidden" name="allowFeed" th:value="${contents!=null and contents.allowFeed !=null}?${contents.allowFeed}: true" id="allowFeed"/>
                             <input type="hidden" name="content" id="content-editor"/>
+                            <input type="hidden" name="languageType" id="languageType"/>
                             <div class="form-group col-md-6" style="padding: 0 0 0 10px;">
                                 <input type="text" class="form-control" placeholder="请输入封面" name="cover" required="required"
                                        aria-required="true" th:value="${contents!=null and contents.cover!=null }?${contents.cover}: ''"/>
@@ -77,6 +78,12 @@
                                             <option th:value="${c.name}" th:text="${c.name}"  th:selected="${null !=contents and adminCommons.exist_cat(c, contents.categories)}?true:false" ></option>
                                         </th:block>
                                     </th:block>
+                                </select>
+                            </div>
+                            <div class="form-group col-md-6">
+                                <select id="lang-sel" class="select2 form-control" multiple="multiple" data-placeholder="语言选择...">
+                                    <option value="en" selected="selected">英文</option>
+                                    <option value="cn">中文</option>
                                 </select>
                             </div>
                             <div class="clearfix"></div>
@@ -113,7 +120,7 @@
                             <div class="text-right">
                                 <a class="btn btn-default waves-effect waves-light" th:href="@{/admin/article}">返回列表</a>
                                 <button type="button" class="btn btn-primary waves-effect waves-light" onclick="subArticle('publish');">
-                                    保存文章
+                                    发表文章
                                 </button>
                                 <button type="button" class="btn btn-warning waves-effect waves-light" onclick="subArticle('draft');">
                                     存为草稿
