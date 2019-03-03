@@ -83,7 +83,7 @@
   </sql>
   <sql id="Base_Column_List">
     cid, title, slug, created, modified, author_id, type, status, tags, categories, hits, 
-    comments_num, allow_comment, allow_ping, allow_feed, cover
+    comments_num, allow_comment, allow_ping, allow_feed, cover,languageType
   </sql>
   <sql id="Blob_Column_List">
     content
@@ -156,7 +156,7 @@
       #{type,jdbcType=VARCHAR}, #{status,jdbcType=VARCHAR}, #{tags,jdbcType=VARCHAR}, 
       #{categories,jdbcType=VARCHAR}, #{hits,jdbcType=INTEGER}, #{commentsNum,jdbcType=INTEGER}, 
       #{allowComment,jdbcType=BIT}, #{allowPing,jdbcType=BIT}, #{allowFeed,jdbcType=BIT}, 
-      #{content,jdbcType=LONGVARCHAR},#{cover,jdbcType=VARCHAR},#{languageType,jdbcType=VARCHAR)
+      #{content,jdbcType=LONGVARCHAR},#{cover,jdbcType=VARCHAR},#{languageType,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.my.blog.website.modal.Vo.ContentVo" useGeneratedKeys="true" keyProperty="cid">
     insert into t_contents
@@ -336,7 +336,7 @@
         cover = #{record.cover,jdbcType=VARCHAR},
       </if>
       <if test="record.languageType != null">
-        cover = #{record.languageType,jdbcType=VARCHAR},
+        languageType = #{record.languageType,jdbcType=VARCHAR},
       </if>
 
     </set>
@@ -363,7 +363,7 @@
       allow_feed = #{record.allowFeed,jdbcType=BIT},
       content = #{record.content,jdbcType=LONGVARCHAR},
       cover = #{record.cover,jdbcType=VARCHAR}
-      cover = #{record.languageType,jdbcType=VARCHAR}
+      languageType = #{record.languageType,jdbcType=VARCHAR}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -444,7 +444,7 @@
         cover = #{cover,jdbcType=VARCHAR},
       </if>
       <if test="languageType != null">
-        cover = #{languageType,jdbcType=VARCHAR},
+        languageType = #{languageType,jdbcType=VARCHAR},
       </if>
 
     </set>

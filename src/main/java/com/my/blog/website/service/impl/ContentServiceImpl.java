@@ -100,11 +100,11 @@ public class ContentServiceImpl implements IContentService {
     }
 
     @Override
-    public PageInfo<ContentVo> getContents(Integer p, Integer limit) {
+    public PageInfo<ContentVo> getContents(Integer p, Integer limit,String lang) {
         LOGGER.debug("Enter getContents method");
         ContentVoExample example = new ContentVoExample();
         example.setOrderByClause("created desc");
-        example.createCriteria().andTypeEqualTo(Types.ARTICLE.getType()).andStatusEqualTo(Types.PUBLISH.getType());
+        example.createCriteria().andTypeEqualTo(Types.ARTICLE.getType()).andStatusEqualTo(Types.PUBLISH.getType()).andLanguageTypeEqualTo(lang);
         PageHelper.startPage(p, limit);
         List<ContentVo> data = contentDao.selectByExampleWithBLOBs(example);
         PageInfo<ContentVo> pageInfo = new PageInfo<>(data);

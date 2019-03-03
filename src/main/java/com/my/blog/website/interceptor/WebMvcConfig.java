@@ -47,6 +47,7 @@ public class WebMvcConfig extends WebMvcConfigurerAdapter {
         CookieLocaleResolver cookieLocaleResolver=new CookieLocaleResolver();
         cookieLocaleResolver.setCookieMaxAge(3600);
         cookieLocaleResolver.setCookieName("lang");
+        cookieLocaleResolver.setDefaultLocale(Locale.ENGLISH);
         return cookieLocaleResolver;
     }
 

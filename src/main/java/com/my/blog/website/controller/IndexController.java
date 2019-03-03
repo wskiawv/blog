@@ -13,12 +13,10 @@ import com.my.blog.website.modal.Vo.CommentVo;
 import com.my.blog.website.modal.Vo.MediaVo;
 import com.my.blog.website.modal.Vo.MetaVo;
 import com.my.blog.website.service.*;
-import com.my.blog.website.utils.PatternKit;
-import com.my.blog.website.utils.TaleUtils;
+import com.my.blog.website.utils.*;
 import com.vdurmont.emoji.EmojiParser;
 import com.my.blog.website.modal.Bo.CommentBo;
 import com.my.blog.website.modal.Vo.ContentVo;
-import com.my.blog.website.utils.IPKit;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -71,8 +69,8 @@ public class IndexController extends BaseController {
      * @return
      */
     @GetMapping(value = {"/", "index"})
-    public String index(HttpServletRequest request, @RequestParam(value = "limit", defaultValue = "12") int limit) {
-        return this.index(request, 1, limit);
+    public String index(HttpServletRequest request,HttpServletResponse response, @RequestParam(value = "limit", defaultValue = "12") int limit) {
+        return this.index(request,response, 1, limit);
     }
 
     /**
@@ -84,9 +82,17 @@ public class IndexController extends BaseController {
      * @return 主页
      */
     @GetMapping(value = "page/{p}")
-    public String index(HttpServletRequest request, @PathVariable int p, @RequestParam(value = "limit", defaultValue = "12") int limit) {
+    public String index(HttpServletRequest request,HttpServletResponse response, @PathVariable int p, @RequestParam(value = "limit", defaultValue = "12") int limit) {
         p = p < 0 || p > WebConst.MAX_PAGE ? 1 : p;
-        PageInfo<ContentVo> articles = contentService.getContents(p, limit);
+        String lang=CookieUtils.getCookie(request,"lang")!=null ? CookieUtils.getCookie(request,"lang"):"en_US";
+        String language= LanguageUtils.getLanguage(lang);
+        LocaleResolver localeResolver = RequestContextUtils.getLocaleResolver(request);
+        if ("cn".equals(language)) {
+            localeResolver.setLocale(request, response, new Locale("zh", "CN"));
+        } else if ("en".equals(language)) {
+            localeResolver.setLocale(request, response, new Locale("en", "US"));
+        }
+        PageInfo<ContentVo> articles = contentService.getContents(p, limit,language);
         request.setAttribute("articles", articles);
         if (p > 1) {
             this.title(request, "第" + p + "页");
@@ -282,8 +288,16 @@ public class IndexController extends BaseController {
      * @return
      */
     @GetMapping(value = "archives")
-    public String archives(HttpServletRequest request) {
-        List<ArchiveBo> archives = siteService.getArchives();
+    public String archives(HttpServletRequest request,HttpServletResponse response) {
+        String lang=CookieUtils.getCookie(request,"lang")!=null ? CookieUtils.getCookie(request,"lang"):"en_US";
+        String language= LanguageUtils.getLanguage(lang);
+        LocaleResolver localeResolver = RequestContextUtils.getLocaleResolver(request);
+        if ("cn".equals(language)) {
+            localeResolver.setLocale(request, response, new Locale("zh", "CN"));
+        } else if ("en".equals(language)) {
+            localeResolver.setLocale(request, response, new Locale("en", "US"));
+        }
+        List<ArchiveBo> archives = siteService.getArchives(language);
         request.setAttribute("archives", archives);
         return this.render("archives");
     }

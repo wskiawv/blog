@@ -1083,6 +1083,10 @@ public class ContentVoExample {
             addCriterion("allow_feed not between", value1, value2, "allowFeed");
             return (Criteria) this;
         }
+        public Criteria andLanguageTypeEqualTo(String value) {
+            addCriterion("languageType =", value, "languageType");
+            return (Criteria) this;
+        }
     }
 
     /**
